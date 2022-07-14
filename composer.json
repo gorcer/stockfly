@@ -1,0 +1,19 @@
+{
+    "name": "gorcer/nano",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "gorcer",
+            "email": "gorcer@gmail.com"
+        }
+    ],
+    "require": {
+        "hyperf/nano": "^1.0",
+        "hyperf/db-connection": "^2.2",
+        "gabordemooij/redbean": "^5.7"
+    }
+}
