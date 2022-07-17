@@ -24,6 +24,7 @@ class SliceController {
 
         $slice = R::dispense('slices');
         $slice->title = $request->input('title', '');
+        $slice->external_id = $request->input('external_id', '');
         $slice->cluster_id = $clusterId;
         R::store( $slice );
         return $slice;
@@ -32,7 +33,8 @@ class SliceController {
     public function update($id, RequestInterface $request, ResponseInterface $response) {
 
         $slice = R::load( 'slices', $id );
-        $slice->title = $request->input('title', '');
+        $slice->title = $request->input('title', $slice->title);
+        $slice->external_id = $request->input('external_id', $slice->external_id);
         R::store( $slice );
         return $slice;
     }

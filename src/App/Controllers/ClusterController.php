@@ -21,7 +21,7 @@ class ClusterController {
         return $result;
     }
 
-    public function create(RequestInterface $request, ResponseInterface $response) {
+    public function create(RequestInterface $request) {
 
         $cluster = R::dispense('clusters');
         $cluster->title = $request->input('title', '');
@@ -29,12 +29,24 @@ class ClusterController {
         return $cluster;
     }
 
-    public function update($id, RequestInterface $request, ResponseInterface $response) {
+    public function update($id, RequestInterface $request) {
 
         $cluster = R::load( 'clusters', $id );
         $cluster->title = $request->input('title', '');
         R::store( $cluster );
         return $cluster;
+    }
+
+    public function get($title, RequestInterface $request) {
+        $cluster = R::findOne( 'clusters', 'title=?', [$title] );
+
+        if ($cluster == null) {
+            $cluster = R::dispense('clusters');
+            $cluster->title = $title;
+            R::store( $cluster );
+        }
+
+        return $cluster->id;
     }
 
     public function delete($id, RequestInterface $request, ResponseInterface $response) {
